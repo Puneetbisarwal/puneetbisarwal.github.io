@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puneet Bisarwal – Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0c0e;
+    --surface: #13151a;
+    --surface2: #1c1f27;
+    --accent: #4fffb0;
+    --accent2: #3de0ff;
+    --text: #e8eaf0;
+    --muted: #7a7f94;
+    --border: #242730;
+    --card: #161820;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(11,12,14,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'DM Mono', monospace; font-size: 1rem; color: var(--accent); letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px; opacity: 0.3;
+  }
+  .hero-glow {
+    position: absolute; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(79,255,176,0.08) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
+  }
+  .hero-content { position: relative; max-width: 1100px; margin: 0 auto; }
+  .hero-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--accent);
+    letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before { content: ''; width: 40px; height: 1px; background: var(--accent); }
+  h1 { font-family: 'DM Serif Display', serif; font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.0; margin-bottom: 1.5rem; color: var(--text); }
+  h1 span { color: transparent; -webkit-text-stroke: 1px var(--accent); }
+  .hero-sub { font-size: 1.15rem; color: var(--muted); max-width: 560px; margin-bottom: 3rem; font-weight: 300; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.25s; cursor: pointer; }
+  .btn-primary { background: var(--accent); color: #0b0c0e; border: 1px solid var(--accent); }
+  .btn-primary:hover { background: transparent; color: var(--accent); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-stats { margin-top: 5rem; display: flex; gap: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--accent); }
+  .stat-label { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; }
+  section { padding: 6rem 4rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-tag { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  h2 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 3rem; color: var(--text); }
+  #about { background: var(--surface); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 1.05rem; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .contact-chips { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2rem; }
+  .chip { display: flex; align-items: center; gap: 0.75rem; font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--muted); }
+  .chip-icon { color: var(--accent); font-size: 1rem; }
+  .chip a { color: inherit; text-decoration: none; transition: color 0.2s; }
+  .chip a:hover { color: var(--accent); }
+  #skills { background: var(--bg); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.75rem; transition: border-color 0.25s, transform 0.25s; }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .skill-card-title { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag { background: var(--surface2); color: var(--text); font-size: 0.8rem; padding: 0.3rem 0.75rem; border-radius: 2px; border: 1px solid var(--border); font-family: 'DM Mono', monospace; }
+  #experience { background: var(--surface); }
+  .timeline { position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .timeline-item { padding-left: 2.5rem; padding-bottom: 3.5rem; position: relative; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot { position: absolute; left: -5px; top: 6px; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+  .timeline-period { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+  .timeline-role { font-size: 1.2rem; font-weight: 500; color: var(--text); }
+  .timeline-company { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; }
+  .timeline-desc { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .tech-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+  .tech-pill { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent2); background: rgba(61,224,255,0.07); border: 1px solid rgba(61,224,255,0.2); padding: 0.2rem 0.6rem; border-radius: 2px; }
+  #projects { background: var(--bg); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 2rem; transition: border-color 0.25s, transform 0.25s; display: flex; flex-direction: column; }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .project-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-bottom: 1rem; }
+  .project-title { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--text); margin-bottom: 0.75rem; }
+  .project-desc { color: var(--muted); font-size: 0.9rem; flex: 1; margin-bottom: 1.25rem; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .project-tech { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent); background: rgba(79,255,176,0.06); border: 1px solid rgba(79,255,176,0.2); padding: 0.2rem 0.6rem; border-radius: 2px; }
+  #education { background: var(--surface); }
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 2rem; transition: border-color 0.25s; }
+  .edu-card:hover { border-color: var(--accent); }
+  .edu-period { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .edu-degree { font-size: 1.1rem; font-weight: 500; color: var(--text); margin-bottom: 0.3rem; }
+  .edu-uni { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .edu-courses { font-size: 0.82rem; color: var(--muted); font-style: italic; }
+  #contact { background: var(--bg); }
+  .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .contact-info p { color: var(--muted); margin-bottom: 2rem; font-size: 1.05rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.85rem; padding: 1rem 1.25rem; border: 1px solid var(--border); border-radius: 4px; transition: all 0.25s; }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+  .contact-link-icon { color: var(--accent); font-size: 1.1rem; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group label { display: block; font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .form-group input, .form-group textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 0.8rem 1rem; font-family: 'Outfit', sans-serif; font-size: 0.9rem; border-radius: 2px; outline: none; transition: border-color 0.2s; }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  footer { background: var(--surface); border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; }
+  footer p { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--muted); }
+  footer span { color: var(--accent); }
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 3rem; }
+    .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-stats { gap: 2rem; flex-wrap: wrap; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">pb.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Open to new opportunities</div>
+    <h1>Puneet<br><span>Bisarwal</span></h1>
+    <p class="hero-sub">Software Engineer crafting secure, cross-platform applications — from .NET MAUI mobile apps to Django web systems and Next.js PWAs.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects →</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">4+</div><div class="stat-label">Years Experience</div></div>
+      <div><div class="stat-num">7+</div><div class="stat-label">Projects Built</div></div>
+      <div><div class="stat-num">M.Tech</div><div class="stat-label">DTU Delhi</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-inner fade-in">
+    <div class="section-tag">// 01 — about</div>
+    <h2>Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a <strong>Software Engineer</strong> based in Delhi, India, with a Master of Technology in Information Systems from <strong>Delhi Technological University (DTU)</strong>.</p>
+        <p>My work spans full-stack development, cross-platform mobile apps, and secure authentication systems. I enjoy building software that's reliable, scalable, and makes real-world operations more efficient.</p>
+        <p>I've worked across industries — from aviation and automotive to fintech and enterprise SaaS — building tools that real users depend on daily.</p>
+        <p>Outside work, I'm passionate about <strong>Machine Learning</strong> and image processing. My M.Tech research involved detecting lung cancer using ML on routine clinical blood indices.</p>
+      </div>
+      <div>
+        <div class="contact-chips">
+          <div class="chip"><span class="chip-icon">📍</span> Delhi, India</div>
+
+          <div class="chip"><span class="chip-icon">🔗</span><a href="https://linkedin.com/in/puneetbisarwal/" target="_blank">linkedin.com/in/puneetbisarwal</a></div>
+          <div class="chip"><span class="chip-icon">🐙</span><a href="https://github.com/Puneetbisarwal" target="_blank">github.com/Puneetbisarwal</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-inner fade-in">
+    <div class="section-tag">// 02 — skills</div>
+    <h2>Languages &amp; Tools</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">C++</span><span class="skill-tag">C#</span><span class="skill-tag">Java</span><span class="skill-tag">Python</span><span class="skill-tag">TypeScript</span><span class="skill-tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Frameworks</div>
+        <div class="skill-tags">
+          <span class="skill-tag">.NET MAUI</span><span class="skill-tag">Django</span><span class="skill-tag">Wagtail</span><span class="skill-tag">Angular</span><span class="skill-tag">Next.js</span><span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span class="skill-tag">EF Core</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span><span class="skill-tag">SQL Server</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Tools &amp; Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span><span class="skill-tag">Visual Studio</span><span class="skill-tag">IntelliJ IDEA</span><span class="skill-tag">Anaconda</span><span class="skill-tag">Asana</span><span class="skill-tag">Zulip</span><span class="skill-tag">VirtualBox</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">ML &amp; Data</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Machine Learning</span><span class="skill-tag">SVM</span><span class="skill-tag">XGBoost</span><span class="skill-tag">OpenCV</span><span class="skill-tag">EDA</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Concepts</div>
+        <div class="skill-tags">
+          <span class="skill-tag">2FA / MFA</span><span class="skill-tag">RBAC</span><span class="skill-tag">Multitenancy</span><span class="skill-tag">PWA</span><span class="skill-tag">REST APIs</span><span class="skill-tag">Cross-Platform</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-inner fade-in">
+    <div class="section-tag">// 03 — experience</div>
+    <h2>Work History</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">June 2025 – November 2025</div>
+        <div class="timeline-role">Software Engineer</div>
+        <div class="timeline-company">Schnellsoft Solutions Pvt. Ltd — Noida</div>
+        <p class="timeline-desc">Developed multiple full-stack enterprise applications including a cross-platform MAUI authentication app, a Django-based installation reporting CMS, an OTP web app with 2FA, and a mobile-first PWA for ICICI Bank PM reports.</p>
+        <p class="timeline-desc">Implemented role-based access control, multitenancy, audit logging, OTP-based authentication, and PDF report generation. Deployed all applications to production servers.</p>
+        <div class="tech-pills">
+          <span class="tech-pill">C#</span><span class="tech-pill">.NET MAUI</span><span class="tech-pill">Django</span><span class="tech-pill">Next.js</span><span class="tech-pill">React</span><span class="tech-pill">TypeScript</span><span class="tech-pill">PostgreSQL</span><span class="tech-pill">Node.js</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">August 2020 – August 2022</div>
+        <div class="timeline-role">Software Engineer</div>
+        <div class="timeline-company">Motherson Technology Services Limited (MTSL) — Noida</div>
+        <p class="timeline-desc">Integrated and managed data pipelines using SQL Server. Participated in end-to-end architecture, design, and implementation of multiple features. Collaborated with cross-functional teams to deliver scalable solutions.</p>
+        <p class="timeline-desc">Performed code reviews, manual testing, and coordinated with developers to improve software design and system interfaces.</p>
+        <div class="tech-pills">
+          <span class="tech-pill">C++</span><span class="tech-pill">SQL Server</span><span class="tech-pill">Git</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">June 2016 – August 2016</div>
+        <div class="timeline-role">Intern</div>
+        <div class="timeline-company">Air India Limited — New Delhi</div>
+        <p class="timeline-desc">Created an Android application for a field tripper's organization.</p>
+        <div class="tech-pills">
+          <span class="tech-pill">Android</span><span class="tech-pill">Java</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-inner fade-in">
+    <div class="section-tag">// 04 — projects</div>
+    <h2>What I've Built</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-num">01 —</div>
+        <div class="project-title">Mobile Verify App</div>
+        <p class="project-desc">Cross-platform .NET MAUI app for OTP-based authentication with centralized PostgreSQL audit logging, machine-specific password encryption, and role-based access across 7 tenant locations.</p>
+        <div class="project-stack"><span class="project-tech">C#</span><span class="project-tech">.NET MAUI</span><span class="project-tech">PostgreSQL</span><span class="project-tech">EF Core</span><span class="project-tech">MFA</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">02 —</div>
+        <div class="project-title">Installation Reporting App</div>
+        <p class="project-desc">Django + Wagtail CMS to record and manage 12,000+ installation activities. Supports multitenancy with isolated data per organisation, CSV zone imports, and full media management.</p>
+        <div class="project-stack"><span class="project-tech">Django</span><span class="project-tech">Wagtail</span><span class="project-tech">Python 3.13</span><span class="project-tech">PostgreSQL</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">03 —</div>
+        <div class="project-title">OTP Web Application</div>
+        <p class="project-desc">Secure 2FA gateway with username/password + SMS/app-based OTP. Built with Node.js and TypeScript, role-based access for Super Admins and Users, deployed to production.</p>
+        <div class="project-stack"><span class="project-tech">Node.js</span><span class="project-tech">TypeScript</span><span class="project-tech">PostgreSQL</span><span class="project-tech">2FA</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">04 —</div>
+        <div class="project-title">ICICI PMS Report App</div>
+        <p class="project-desc">Mobile-first offline-capable PWA for bank engineers to capture half-yearly PM reports, generating pixel-accurate PDFs with digital signatures and 8-section tab navigation.</p>
+        <div class="project-stack"><span class="project-tech">Next.js 15</span><span class="project-tech">React 19</span><span class="project-tech">TypeScript</span><span class="project-tech">PWA</span><span class="project-tech">PostgreSQL</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">05 —</div>
+        <div class="project-title">Lung Cancer Detection (ML)</div>
+        <p class="project-desc">M.Tech research: detecting lung cancer via routine blood indices using machine learning. Performed full EDA, univariate and bi-variate analysis to identify meaningful classification features.</p>
+        <div class="project-stack"><span class="project-tech">Python</span><span class="project-tech">Anaconda</span><span class="project-tech">ML</span><span class="project-tech">EDA</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">06 —</div>
+        <div class="project-title">Car Anti-Theft Device</div>
+        <p class="project-desc">Raspberry Pi 3 security device using OpenCV face detection to identify unauthorised car access and trigger email alerts to the vehicle owner. Explored ML on embedded low-compute hardware.</p>
+        <div class="project-stack"><span class="project-tech">Python</span><span class="project-tech">OpenCV</span><span class="project-tech">Raspberry Pi</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">07 —</div>
+        <div class="project-title">Stack Overflow Quality Classifier</div>
+        <p class="project-desc">Classified high-quality Stack Overflow Q&amp;As using SVM and XGBoost with PageRank-based metrics. Full data preparation, cleaning, and baseline model implementation.</p>
+        <div class="project-stack"><span class="project-tech">Python</span><span class="project-tech">SVM</span><span class="project-tech">XGBoost</span><span class="project-tech">PageRank</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-inner fade-in">
+    <div class="section-tag">// 05 — education</div>
+    <h2>Academic Background</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-period">August 2018 – July 2020</div>
+        <div class="edu-degree">M.Tech in Information Systems</div>
+        <div class="edu-uni">Delhi Technological University (DTU), Delhi</div>
+        <div class="edu-courses">Machine Learning · Network Management &amp; Security · Digital Image Processing &amp; Analysis</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-period">August 2013 – July 2017</div>
+        <div class="edu-degree">B.Tech in Computer Engineering</div>
+        <div class="edu-uni">Bharati Vidyapeeth's College of Engineering (BVCOE), Delhi</div>
+        <div class="edu-courses">Operating Systems · DBMS · OOPs &amp; Data Structures · Computer Networks</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner fade-in">
+    <div class="section-tag">// 06 — contact</div>
+    <h2>Get in Touch</h2>
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <p>I'm open to new opportunities, collaborations, or just a conversation about interesting software problems. Feel free to reach out.</p>
+        <div class="contact-links">
+
+          <a href="https://linkedin.com/in/puneetbisarwal/" target="_blank" class="contact-link"><span class="contact-link-icon">in</span>linkedin.com/in/puneetbisarwal</a>
+          <a href="https://github.com/Puneetbisarwal" target="_blank" class="contact-link"><span class="contact-link-icon">⌥</span>github.com/Puneetbisarwal</a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-group"><label>Name</label><input type="text" placeholder="Your name"></div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Message</label><textarea placeholder="What's on your mind?"></textarea></div>
+        <a href="https://linkedin.com/in/puneetbisarwal/" target="_blank" class="btn btn-primary" style="align-self:flex-start">Send Message →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>Puneet Bisarwal</span>. All rights reserved.</p>
+  <p>Host free on <span>GitHub Pages</span></p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id'); });
+    navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : ''; });
+  });
+</script>
+</body>
+</html>
